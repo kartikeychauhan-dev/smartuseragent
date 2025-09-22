@@ -4,7 +4,7 @@ import dev.langchain4j.model.chat.ChatModel;
 import org.springframework.beans.factory.annotation.Value;
 
 public abstract class ModelProperties {
-	@Value("${smartGroupAssignAgent.aimodel.base-url}")
+	@Value("${smartGroupAssignAgent.aimodel.baseUrl}")
 	public String apiUrl;
 	@Value("${smartGroupAssignAgent.aimodel.chat.model}")
 	public String modelName;
