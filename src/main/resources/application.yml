@@ -1,22 +1,28 @@
 spring:
   application:
-    name: smartuserassignai
-smartuseragent:
+    name: smartusergroupassignai
+smartGroupAssignAgent:
   aimodel:
-    base-url: http://localhost:11434
-    apiKey:
+    baseUrl: http://20.185.83.16:8080/
+    apiKey: aie93JaTv1GW1AP4IIUSqeecV22HgpcQ6WlgWNyfx2HflkY5hTw19JDbT90ViKcZaZ6lpjOo3YIGgpkG7Zb8jEKvdM5Ymnq9jPm79osLppCebwJ7WdWTwWq3Rf15NDxm
     chat.model: gemma2
     temperature: 0.7
-    timeout.inMins: 2
+    timeout.inMins: 4
   prompt: |
     You are a model which will judge the data as description and short description of a ticket and on the base of team description you will decide which team is best for it.
     Description is {{Description}} and short description is {{ShortDescription}}.
     Teams description {{TeamDescription}}
     Identify which team is best.
+    Stay with team description strictly.
     If prediction confidence of {{Confidence}}% identifying is lower then this then return {{DefaultTeam}} name as a default.
-    Result should contain only one word or one team name.
-  teamdescription: |
-  confidence: 70
-  defaultteam: Support Center
+    Result should contain only one word or one team name so remove everything return team name.
 
-    
+  teamDescription: |
+    Backend Team - Addresses backend system issues, including unauthorized access errors (401, 403), API failures, and other server-side problems that impact application security and functionality.
+    Data Team - Responsible for investigating and resolving data-related issues, such as report data mismatches, data integrity concerns, and discrepancies in business-critical datasets.
+    BI Team - Focuses on business intelligence platform issues, including dashboard loading failures and incorrect KPI aggregation logic, ensuring accurate and reliable analytics for stakeholders.
+    Mendix Team - Specializes in diagnosing and fixing workflow execution errors within Mendix applications, maintaining seamless business process automation and application stability.
+
+  confidence: 100
+  defaultTeam: Support Center
+
