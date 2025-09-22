@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: smartuserassignai
+smartuseragent:
+  aimodel:
+    base-url: http://localhost:11434
+    apiKey:
+    chat.model: gemma2
+    temperature: 0.7
+    timeout.inMins: 2
+  prompt: |
+    You are a model which will judge the data as description and short description of a ticket and on the base of team description you will decide which team is best for it.
+    Description is {{Description}} and short description is {{ShortDescription}}.
+    Teams description {{TeamDescription}}
+    Identify which team is best.
+    If prediction confidence of {{Confidence}}% identifying is lower then this then return {{DefaultTeam}} name as a default.
+    Result should contain only one word or one team name.
+  teamdescription: |
+  confidence: 70
+  defaultteam: Support Center
+
+    
