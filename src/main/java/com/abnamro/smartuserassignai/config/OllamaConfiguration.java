@@ -1,4 +1,4 @@
-package com.abnamro.smartuserassignai.Config;
+package com.abnamro.smartuserassignai.config;
 
 import java.time.Duration;
 import java.util.Map;

@@ -1,10 +1,10 @@
-package com.abnamro.smartuserassignai.Config;
+package com.abnamro.smartuserassignai.config;
 
 import dev.langchain4j.model.chat.ChatModel;
 import org.springframework.beans.factory.annotation.Value;
 
 public abstract class ModelProperties {
-	@Value("${smartGroupAssignAgent.aimodel.baseUrl}")
+	@Value("${smartGroupAssignAgent.aimodel.base-url}")
 	public String apiUrl;
 	@Value("${smartGroupAssignAgent.aimodel.chat.model}")
 	public String modelName;
