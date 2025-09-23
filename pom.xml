@@ -10,9 +10,9 @@
 
 	</parent>
 	<groupId>com.abnamro</groupId>
-	<artifactId>smartuserassignai</artifactId>
+	<artifactId>smartgroupassignai</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>smartuserassignai</name>
+	<name>smartgroupassignai</name>
 	<description>project for automatic user assignment for SNOW</description>
 	<url/>
 	<licenses>

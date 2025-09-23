@@ -3,18 +3,18 @@ spring:
     name: smartusergroupassignai
 smartGroupAssignAgent:
   aimodel:
-    baseUrl: http://20.185.83.16:8080/
-    apiKey: aie93JaTv1GW1AP4IIUSqeecV22HgpcQ6WlgWNyfx2HflkY5hTw19JDbT90ViKcZaZ6lpjOo3YIGgpkG7Zb8jEKvdM5Ymnq9jPm79osLppCebwJ7WdWTwWq3Rf15NDxm
-    chat.model: gemma2
     temperature: 0.7
-    timeout.inMins: 4
+    timeout:
+      inMins: 4
   prompt: |
     You are a model which will judge the data as description and short description of a ticket and on the base of team description you will decide which team is best for it.
-    Description is {{Description}} and short description is {{ShortDescription}}.
-    Teams description {{TeamDescription}}
+    Description is {{desc}} and short description is {{shortdesc}}.
+    Teams description -
+    {{teamDesc}}
+
     Identify which team is best.
     Stay with team description strictly.
-    If prediction confidence of {{Confidence}}% identifying is lower then this then return {{DefaultTeam}} name as a default.
+    If prediction confidence of {{confidence}}% identifying is lower than this then return team name {{defaultTeamName}}.
     Result should contain only one word or one team name so remove everything return team name.
 
   teamDescription: |
@@ -24,5 +24,29 @@ smartGroupAssignAgent:
     Mendix Team - Specializes in diagnosing and fixing workflow execution errors within Mendix applications, maintaining seamless business process automation and application stability.
 
   confidence: 100
-  defaultTeam: Support Center
+  defaultTeamName: Support Center
 
+
+---
+spring:
+  config:
+    activate:
+      on-profile: azure
+smartGroupAssignAgent:
+  aimodel:
+    baseUrl: http://20.185.83.16:8080/
+    apiKey: aie93JaTv1GW1AP4IIUSqeecV22HgpcQ6WlgWNyfx2HflkY5hTw19JDbT90ViKcZaZ6lpjOo3YIGgpkG7Zb8jEKvdM5Ymnq9jPm79osLppCebwJ7WdWTwWq3Rf15NDxm
+    chat:
+      model: gemma2
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+smartGroupAssignAgent:
+  aimodel:
+    baseUrl: 127.0.0.1:11434
+    apiKey:
+    chat:
+      model: gemma2

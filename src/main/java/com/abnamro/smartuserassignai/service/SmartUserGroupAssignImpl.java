@@ -1,8 +1,8 @@
 package com.abnamro.smartuserassignai.service;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
+
+import javax.validation.constraints.NotNull;
 
 import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.model.chat.ChatModel;
@@ -19,14 +19,13 @@ import org.springframework.stereotype.Service;
 	}
 
 	@Value("${smartGroupAssignAgent.confidence}")
-	String confidence;
-
-	List<String> teams = Arrays.asList("BI Team" ,"Data Team" ,"Mendix Team" ,"Backend Team");
+	private String confidence;
 
 	@Value("${smartGroupAssignAgent.prompt}")
 	private String prompt;
 
-	@Value("${smartGroupAssignAgent.defaultTeam}")
+	@Value("${smartGroupAssignAgent.defaultTeamName}")
+	@NotNull
 	private String defaultTeam;
 
 	@Value("${smartGroupAssignAgent.teamDescription}")
@@ -34,16 +33,17 @@ import org.springframework.stereotype.Service;
 
 
 
-	@Override public String getUserGroupAssignedByAi(String short_desc, String desc) {
+	@Override public String getUserGroupAssignedByAi(String shortdesc, String desc) {
 //		String prompt = "Which only one team looks suitable for Desc This "+desc +  " and short description"+ short_desc+ " with confidence of "+confidence+ "% of pridicting "+ Arrays.toString(teams.toArray()) + " if not confident return Service Support team and return only team name one word";
-		var values = new HashMap<String, String>();
-		values.put("Confidence", confidence);
-		values.put("Description", desc);
-		values.put("ShortDescription", short_desc);
-		values.put("DefaultTeam", defaultTeam);
-		values.put("TeamDescription", teamDescription);
-		String promptemplate = PromptTemplate.from(prompt).apply(values).text();
-		UserMessage userMessage = UserMessage.from(promptemplate);
+
+		var values = new HashMap<String, Object>();
+		values.put("desc", desc);
+		values.put("shortdesc", shortdesc);
+		values.put("teamDesc", teamDescription);
+		values.put("confidence", confidence);
+		values.put("defaultTeamName", defaultTeam);
+		var promptTemplate = PromptTemplate.from(prompt).apply(values).text();
+		UserMessage userMessage = UserMessage.from(promptTemplate);
 		String result= chatModel.chat(userMessage).aiMessage().text();
 
 		return result;
