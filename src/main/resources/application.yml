@@ -3,6 +3,10 @@ spring:
     name: smartusergroupassignai
 smartGroupAssignAgent:
   aimodel:
+    baseUrl: http://20.185.83.16:8080/
+    apiKey: aie93JaTv1GW1AP4IIUSqeecV22HgpcQ6WlgWNyfx2HflkY5hTw19JDbT90ViKcZaZ6lpjOo3YIGgpkG7Zb8jEKvdM5Ymnq9jPm79osLppCebwJ7WdWTwWq3Rf15NDxm
+    chat:
+      model: gemma2
     temperature: 0.7
     timeout:
       inMins: 4
@@ -27,26 +31,26 @@ smartGroupAssignAgent:
   defaultTeamName: Support Center
 
 
----
-spring:
-  config:
-    activate:
-      on-profile: azure
-smartGroupAssignAgent:
-  aimodel:
-    baseUrl: http://20.185.83.16:8080/
-    apiKey: aie93JaTv1GW1AP4IIUSqeecV22HgpcQ6WlgWNyfx2HflkY5hTw19JDbT90ViKcZaZ6lpjOo3YIGgpkG7Zb8jEKvdM5Ymnq9jPm79osLppCebwJ7WdWTwWq3Rf15NDxm
-    chat:
-      model: gemma2
-
----
-spring:
-  config:
-    activate:
-      on-profile: dev
-smartGroupAssignAgent:
-  aimodel:
-    baseUrl: 127.0.0.1:11434
-    apiKey:
-    chat:
-      model: gemma2
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: azure
+#smartGroupAssignAgent:
+#  aimodel:
+#    baseUrl: http://20.185.83.16:8080/
+#    apiKey: aie93JaTv1GW1AP4IIUSqeecV22HgpcQ6WlgWNyfx2HflkY5hTw19JDbT90ViKcZaZ6lpjOo3YIGgpkG7Zb8jEKvdM5Ymnq9jPm79osLppCebwJ7WdWTwWq3Rf15NDxm
+#    chat:
+#      model: gemma2
+#
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: dev
+#smartGroupAssignAgent:
+#  aimodel:
+#    baseUrl: 127.0.0.1:11434
+#    apiKey:
+#    chat:
+#      model: gemma2
