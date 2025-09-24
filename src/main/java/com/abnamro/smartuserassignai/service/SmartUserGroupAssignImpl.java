@@ -1,6 +1,8 @@
 package com.abnamro.smartuserassignai.service;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
@@ -31,21 +33,21 @@ import org.springframework.stereotype.Service;
 	@Value("${smartGroupAssignAgent.teamDescription}")
 	private String teamDescription;
 
-
+	List<String> teams = Arrays.asList("Backend Team", "Data Team", "BI Team", "Mendix Team", teamDescription);
 
 	@Override public String getUserGroupAssignedByAi(String shortdesc, String desc) {
-//		String prompt = "Which only one team looks suitable for Desc This "+desc +  " and short description"+ short_desc+ " with confidence of "+confidence+ "% of pridicting "+ Arrays.toString(teams.toArray()) + " if not confident return Service Support team and return only team name one word";
-
 		var values = new HashMap<String, Object>();
-		values.put("desc", desc);
-		values.put("shortdesc", shortdesc);
-		values.put("teamDesc", teamDescription);
-		values.put("confidence", confidence);
-		values.put("defaultTeamName", defaultTeam);
+		values.put("Description", desc);
+		values.put("ShortDescription", shortdesc);
+		values.put("TeamDescription", teamDescription);
+		values.put("Confidence", confidence);
+		values.put("DefaultTeamName", defaultTeam);
 		var promptTemplate = PromptTemplate.from(prompt).apply(values).text();
 		UserMessage userMessage = UserMessage.from(promptTemplate);
-		String result= chatModel.chat(userMessage).aiMessage().text();
-
+		String result= chatModel.chat(userMessage).aiMessage().text().trim();
+		 if(result.isEmpty() || !teams.contains(result)){
+			return defaultTeam;
+		}
 		return result;
 	}
 }
